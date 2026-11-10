@@ -1,0 +1,10 @@
+{
+  "name": "perde-ai-studio",
+  "version": "1.0.0",
+  "description": "Perde AI Studio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "private": true
+}
