@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perde AI Studio</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f5f2ee;
+color:#302b28;
+}
+header{
+background:#292522;
+color:white;
+padding:25px;
+text-align:center;
+}
+header h1{margin:0;font-size:28px}
+header p{color:#d6c8b9}
+main{
+max-width:950px;
+margin:30px auto;
+padding:20px;
+}
+.card{
+background:white;
+padding:25px;
+border-radius:16px;
+margin-bottom:20px;
+box-shadow:0 4px 18px #0000000c;
+}
+h2{font-size:20px}
+.uploads{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+}
+.upload{
+border:2px dashed #c9b9a8;
+padding:25px;
+border-radius:12px;
+text-align:center;
+}
+input[type=file]{
+width:100%;
+margin-top:15px;
+}
+button{
+background:#80654f;
+color:white;
+border:0;
+padding:15px 25px;
+border-radius:9px;
+cursor:pointer;
+font-size:16px;
+width:100%;
+}
+.preview{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+.preview img{
+width:100%;
+max-height:300px;
+object-fit:contain;
+border-radius:10px;
+}
+#message{
+margin-top:15px;
+color:#80654f;
+text-align:center;
+}
+@media(max-width:600px){
+.uploads,.preview{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Perde AI Studio</h1>
+<p>Hayalindeki perdeyi odanda tasarla</p>
+</header>
+
+<main>
+<section class="card">
+<h2>1. Oda fotoğrafını yükle</h2>
+<div class="upload">
+Oda fotoğrafını seç
+<input type="file" id="room" accept="image/*">
+</div>
+</section>
+
+<section class="card">
+<h2>2. Perde kumaşını yükle</h2>
+<div class="upload">
+Kumaş fotoğrafını seç
+<input type="file" id="fabric" accept="image/*">
+</div>
+</section>
+
+<section class="card">
+<h2>3. Görsellerin</h2>
+<div class="preview">
+<div>
+<p>Oda fotoğrafı</p>
+<img id="roomPreview" alt="Oda önizlemesi">
+</div>
+<div>
+<p>Kumaş fotoğrafı</p>
+<img id="fabricPreview" alt="Kumaş önizlemesi">
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>4. Perde modelini seç</h2>
+<select id="style" style="width:100%;padding:14px">
+<option>Kruvaze perde</option>
+<option>Fon perde</option>
+<option>Rustik perde</option>
+<option>Avangart perde</option>
+<option>Modern perde</option>
+<option>Japon perde</option>
+</select>
+<br><br>
+<button onclick="generate()">Perde tasarımını hazırla</button>
+<div id="message"></div>
+</section>
+</main>
+
+<script>
+function preview(inputId,imageId){
+document.getElementById(inputId).addEventListener("change",function(){
+const file=this.files[0];
+if(file){
+document.getElementById(imageId).src=URL.createObjectURL(file);
+}
+});
+}
+
+preview("room","roomPreview");
+preview("fabric","fabricPreview");
+
+function generate(){
+const room=document.getElementById("room").files[0];
+const fabric=document.getElementById("fabric").files[0];
+
+if(!room || !fabric){
+document.getElementById("message").textContent=
+"Lütfen oda ve kumaş fotoğrafını yükle.";
+return;
+}
+
+document.getElementById("message").textContent=
+"Fotoğrafların hazır. Yapay zekâ tasarım bağlantısı sonraki aşamada eklenecek.";
+}
+</script>
+
+</body>
+</html>
